@@ -1,0 +1,98 @@
+.post-wrapper {
+  height: 240px;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+
+  .post-item {
+    height: 100%;
+    display: block;
+    margin-bottom: 30px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    background-size: 145px;
+    position: relative;
+    color: #fff;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.4);
+    background-color: #2e3035;
+    transition: box-shadow 0.25s;
+    -webkit-transition: box-shadow 0.25s;
+
+    &-container {
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      border-radius: 3px;
+
+      .post-item-media {
+        height: 173px;
+        overflow: hidden;
+
+        .postVideo {
+          position: relative;
+          overflow: hidden;
+          text-align: center;
+          width: 100%;
+
+          &-wrapper {
+            max-height: 100%;
+            display: flex;
+            justify-content: center;
+            isolation: auto;
+
+            video {
+              height: 192px;
+              display: inline-block;
+            }
+          }
+        }
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .post-item-title-wrap {
+        background: #474a51;
+        background-color: rgb(71, 74, 81);
+        padding-top: 10px;
+        color: #fff;
+        margin-top: 0;
+        position: absolute;
+        width: 100%;
+        transition: background 0.2s;
+        bottom: 0;
+        left: 0;
+
+        .post-item-tilte {
+          font-weight: 600;
+          line-height: 1.14;
+          font-size: 14px;
+          text-align: left;
+          color: #fff;
+          display: inline-block;
+          max-height: 45px;
+          overflow: hidden;
+          padding: 0 15px;
+
+          span {
+            display: -webkit-box;
+            max-height: 31.92px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -moz-box-orient: vertical;
+            -webkit-line-clamp: 2;
+          }
+        }
+
+        .post-item-info {
+          display: flex;
+          align-items: center;
+          font-size: 12px;
+          line-height: 1.5;
+          letter-spacing: 0.3px;
+        }
+      }
+    }
+  }
+}

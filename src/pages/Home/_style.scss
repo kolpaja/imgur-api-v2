@@ -1,0 +1,14 @@
+@import './Post.scss';
+
+.home {
+  padding-top: 20px;
+}
+
+.gallery-title {
+  overflow: hidden;
+  max-height: 40px;
+  text-overflow: ellipsis;
+  font-size: 16px;
+  padding: 0 15px;
+  line-height: 1.14;
+}
