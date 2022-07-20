@@ -12,7 +12,7 @@ function App() {
     <GlobalLayout>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/gallery/:id' element={<GalleryView />} />
+        <Route path='/gallery/:galleryId' element={<GalleryView />} />
         <Route path='/about' element={<About />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />

@@ -1,0 +1,9 @@
+.gallery {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: stretch;
+  .gallery-main-container {
+  }
+}

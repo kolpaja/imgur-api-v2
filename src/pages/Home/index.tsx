@@ -1,8 +1,10 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
 import { useAppSelector } from '../../app/hooks';
 import Filters from './Filters';
 import GalleryList from './GalleryList';
+import { getGalleries } from '../../features/galleryListSlice';
+import { useAppDispatch } from '../../app/hooks';
 
 const API_URL = 'https://api.imgur.com/3/gallery';
 
@@ -15,14 +17,15 @@ export type GalleryFilters = {
 };
 
 function Home() {
-  const [gallery, setGallery] = useState([]);
   const [isLoading, setIsloading] = useState(true);
   const [error, setError] = useState();
 
+  const dispatch = useAppDispatch();
   const filters = useAppSelector((state) => state.filters);
+  const { list } = useAppSelector((state) => state.galleries);
 
   useEffect(() => {
-    const fetchGallery = async (filters: GalleryFilters) => {
+    const asyncFetchGalleries = async (filters: GalleryFilters) => {
       const { section, sort, window, page, showViral } = filters;
       const response = await fetch(
         `${API_URL}/${section}/${sort}/${window}/${page}?showViral=${
@@ -37,13 +40,13 @@ function Home() {
       const resData = await response.json();
       // console.log(resData);
       if (resData.success) {
-        setGallery(resData.data);
         setIsloading(false);
+        dispatch(getGalleries(resData.data));
       } else {
         console.log(resData.data.error);
       }
     };
-    fetchGallery(filters);
+    asyncFetchGalleries(filters);
   }, [filters]);
 
   return (
@@ -57,7 +60,7 @@ function Home() {
           className='position-absolute top-50 start-50 '
         />
       ) : (
-        <GalleryList galleryList={gallery} />
+        <GalleryList galleryList={list} />
       )}
     </div>
   );

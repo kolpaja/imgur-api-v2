@@ -1,11 +1,15 @@
 import { Link } from 'react-router-dom';
+import { ChatSquareFill, EyeFill } from 'react-bootstrap-icons';
+import { ReactComponent as ArrowUp } from '../../assets/svg/arrow-up.svg';
+import { ReactComponent as ArrowDown } from '../../assets/svg/arrow-down.svg';
+import { nrFormatter } from '../../utils/formats';
 
 type PostProps = {
   gallery: any;
 };
 
 const Post = ({ gallery }: PostProps) => {
-  console.log({ gallery });
+  // console.log({ gallery });
   return (
     <div className='post-wrapper'>
       <Link
@@ -50,12 +54,38 @@ const Post = ({ gallery }: PostProps) => {
           </div>
           {/* post-meta -ex. badges.. */}
           <div className='post-meta'></div>
+
           {/* post info - likes score */}
           <div className='post-item-title-wrap'>
             <div className='post-item-title'>
               <span>{gallery.title}</span>
             </div>
-            <div className='post-item-info'></div>
+            <div className='post-item-info'>
+              {/* votes */}
+              <div className='media'>
+                <div className='post-item-stat post-item-vote vote vote-up'>
+                  <ArrowUp />
+                </div>
+                <div className='mediaBody post-item-vote-points'>
+                  {gallery.points}
+                </div>
+                <div className='post-item-vote post-item-stat  vote-down vote'>
+                  <ArrowDown />
+                </div>
+              </div>
+
+              {/* comments */}
+              <div className='media post-item-stat'>
+                <ChatSquareFill />
+                <div className='mediaBody'>{gallery.comment_count}</div>
+              </div>
+
+              {/* views */}
+              <div className='media post-item-stat'>
+                <EyeFill />
+                <div className='mediaBody'>{nrFormatter(gallery.views)}</div>
+              </div>
+            </div>
           </div>
         </div>
       </Link>

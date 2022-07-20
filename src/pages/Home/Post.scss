@@ -1,4 +1,5 @@
 .post-wrapper {
+  width: 240px;
   height: 240px;
   margin-bottom: 16px;
   position: relative;
@@ -17,6 +18,13 @@
     background-color: #2e3035;
     transition: box-shadow 0.25s;
     -webkit-transition: box-shadow 0.25s;
+
+    &:hover {
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.16);
+      .post-item-title-wrap {
+        background: #56585f;
+      }
+    }
 
     &-container {
       height: 100%;
@@ -53,18 +61,21 @@
       }
 
       .post-item-title-wrap {
-        background: #474a51;
-        background-color: rgb(71, 74, 81);
-        padding-top: 10px;
         color: #fff;
+        border-bottom: 4px solid transparent;
+        transition: background-color 0.25s;
+        -webkit-transition: background-color 0.25s;
+        transition: background 0.2s;
+        overflow: hidden;
+        background: #474a51;
+        padding-top: 10px;
         margin-top: 0;
         position: absolute;
         width: 100%;
-        transition: background 0.2s;
         bottom: 0;
         left: 0;
 
-        .post-item-tilte {
+        .post-item-title {
           font-weight: 600;
           line-height: 1.14;
           font-size: 14px;
@@ -91,6 +102,43 @@
           font-size: 12px;
           line-height: 1.5;
           letter-spacing: 0.3px;
+          justify-content: space-between;
+          min-height: 8px;
+          padding: 0.5rem 1rem;
+          color: #b4b9c2;
+
+          .media {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .mediaBody {
+              margin: 0 0.25rem;
+            }
+          }
+
+          .post-item-stat {
+            z-index: 1;
+            opacity: 0.65;
+
+            &:hover {
+              opacity: 1;
+              color: #fff;
+            }
+
+            svg {
+              width: 16px;
+              height: 16px;
+            }
+          }
+
+          .post-item-vote {
+            line-height: 0;
+          }
+
+          .post-item-vote-points {
+            opacity: 0.65;
+          }
         }
       }
     }

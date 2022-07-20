@@ -6,9 +6,9 @@ type GlobalLayoutProps = {
 
 const GlobalLayout = ({ children }: GlobalLayoutProps) => {
   return (
-    <div className='global-layout'>
+    <div className='global-layout container'>
       <Navbar />
-      <div className='container'>{children}</div>
+      {children}
     </div>
   );
 };

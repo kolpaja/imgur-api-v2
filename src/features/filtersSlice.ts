@@ -14,7 +14,7 @@ const initialState: filters = {
   page: 0,
 };
 
-export const counterSlice = createSlice({
+export const filtersSlice = createSlice({
   name: 'filters',
   initialState,
   reducers: {
@@ -31,6 +31,6 @@ export const counterSlice = createSlice({
   },
 });
 
-export const { changeFilters, nextPage, previousPage } = counterSlice.actions;
+export const { changeFilters, nextPage, previousPage } = filtersSlice.actions;
 
-export default counterSlice.reducer;
+export default filtersSlice.reducer;

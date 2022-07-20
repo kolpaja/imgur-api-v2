@@ -1,14 +1,38 @@
 @import './Post.scss';
 
 .home {
-  padding-top: 20px;
+  padding: 20px auto 0;
 }
 
-.gallery-title {
-  overflow: hidden;
-  max-height: 40px;
-  text-overflow: ellipsis;
-  font-size: 16px;
-  padding: 0 15px;
-  line-height: 1.14;
+.filters {
+  width: 100%;
+}
+.gallery-wrapper {
+  margin: 20px auto;
+}
+
+.gallery-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 240px);
+  grid-gap: 16px;
+}
+
+.vote {
+  position: relative;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.vote-up {
+  &:hover {
+    color: #01b96b !important;
+  }
+}
+
+.vote-down {
+  &:hover {
+    color: #fc6369 !important;
+  }
 }

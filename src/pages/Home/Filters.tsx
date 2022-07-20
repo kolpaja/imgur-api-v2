@@ -45,7 +45,7 @@ const Filters = () => {
   };
 
   return (
-    <div className='d-flex align-items-center justify-content-around'>
+    <div className='filters d-flex align-items-center justify-content-around'>
       {/* filter for section */}
       <div>
         <label htmlFor='section'></label>
