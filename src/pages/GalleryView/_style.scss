@@ -46,6 +46,142 @@
           .content-header {
             position: relative;
             z-index: 1;
+
+            .gallery-title {
+              font-size: 24px;
+              line-height: 130%;
+
+              .title-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+
+                .navigate-other-post {
+                  font-size: 14px;
+                  line-height: 14px;
+                  padding: 10px 11px;
+                  color: #fff;
+                  display: flex;
+                  align-items: center;
+                  height: 36px;
+                }
+              }
+            }
+
+            .gallery-posted-info {
+              display: flex;
+              justify-content: flex-start;
+              height: 40px;
+              align-items: center;
+              margin: 16px 0 24px;
+
+              .author-link {
+                color: #01b96b;
+                img {
+                  border-radius: 50%;
+                  height: 32px;
+                  width: 32px;
+                  overflow: hidden;
+                  transition: transform 0.2s ease-in-out;
+                }
+              }
+
+              .info-wrapper {
+                display: flex;
+                flex-direction: column;
+                margin: 0 32px 0 12px;
+                flex-grow: 1;
+                justify-content: space-around;
+                overflow: hidden;
+
+                .info {
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: flex-start;
+                  font-size: 14px;
+                  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+                  align-items: center;
+
+                  .author-name {
+                    min-width: 0;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    font-family: Proxima Nova Bold, Helvetica Neue, Helvetica,
+                      Arial, sans-serif;
+                    color: #1bb76e;
+                    cursor: pointer;
+                  }
+                  .give-emerald {
+                    margin-left: 12px;
+                    min-width: 98px;
+                    background-color: #6432f9;
+                    border-radius: 3px;
+                    margin-top: 2px;
+                    a {
+                      font-family: Proxima Nova Bold, Helvetica Neue, Helvetica,
+                        Arial, sans-serif;
+                      font-size: 12px;
+                      height: 24px;
+                      min-width: 24px;
+                      height: 18px;
+                      padding: 2px 5px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: space-around;
+
+                      text-decoration: none;
+                    }
+
+                    span,
+                    svg {
+                      font-family: Proxima Nova Bold, Helvetica Neue, Helvetica,
+                        Arial, sans-serif;
+                      font-size: 12px;
+                      cursor: pointer;
+                      color: #fff;
+                    }
+                  }
+                }
+
+                .meta {
+                  font-family: Proxima Nova Regular, Helvetica Neue, Helvetica,
+                    Arial, sans-serif;
+                  color: #3e4043;
+                  font-size: 12px;
+                  line-height: 12px;
+                  margin-top: 4px;
+                }
+              }
+
+              .gallery-options {
+                .item {
+                  display: flex;
+                  align-items: center;
+                  justify-content: flex-start;
+                  color: #6c757d;
+                  padding: 2px 8px;
+
+                  &:hover {
+                    svg path {
+                      fill: black;
+                    }
+                    span {
+                      color: black;
+                    }
+                  }
+                  svg {
+                    color: #6c757d;
+                    width: 24px;
+                    height: 24px;
+                  }
+
+                  span {
+                    padding-left: 12px;
+                  }
+                }
+              }
+            }
           }
           .content-wrapper {
             .media-container {
@@ -56,7 +192,6 @@
               .media {
                 max-width: 100%;
                 margin-bottom: 24px;
-                background-color: rgba(0, 0, 0, 0.1);
                 min-height: 140px;
                 display: flex;
                 justify-content: center;
