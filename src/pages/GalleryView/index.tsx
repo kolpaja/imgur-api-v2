@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
-import { ThreeDots } from 'react-bootstrap-icons';
+import { ThreeDots, Heart } from 'react-bootstrap-icons';
 import { Link, useParams } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
 import { galleryList } from '../../features/galleryListSlice';
+import EngagementBar from './EngagementBar';
 
 function GalleryView() {
   let { galleryId } = useParams();
@@ -20,24 +21,7 @@ function GalleryView() {
       <div className='gallery-main-container'>
         {/* left actions like vote share sidebar */}
         <div className='gallery-engagement-bar'>
-          <div className='engagementbar-container'>
-            <div className='gallery-vote'>
-              <div className='vote-accolades'></div>
-              <div className='vote-controls'>
-                <div className='item up'></div>
-                <div className='item score'></div>
-                <div className='item down'></div>
-                <div className='item favorite'></div>
-              </div>
-            </div>
-            <div className='gallery-share'>
-              <div className='dropdown'>share</div>
-            </div>
-            <div className='gallery-comment-count'>
-              <div className='item'>svg</div>
-              <div className='item'>{post.comment_count}</div>
-            </div>
-          </div>
+          <EngagementBar post={post} />
         </div>
 
         {/* main content */}
@@ -93,11 +77,44 @@ function GalleryView() {
               </div>
               <div className='content-wrapper'>
                 <div>
-                  {/* mapping images of the post */}
+                  {/* mapping images/video of the post */}
                   <div className='media-container'>
                     <div className='media'>
+                      {/* imgs */}
                       <div className='imgContainer zoomable'>
-                        <img />
+                        <div className='dropdown dropdown-media'>
+                          {/* three dots for options */}
+                          {/* dots */}
+                          <div className='dropdown-title'>
+                            <ThreeDots />
+                          </div>
+                          <div className='dropdown-menu'></div>
+                        </div>
+                        <div className=''>
+                          <img src='' alt='' />
+                        </div>
+                      </div>
+
+                      {/* video */}
+                      <div className='post-video'>
+                        <div className='wrapper'>
+                          {/* video play btn optional */}
+                          <div className='video-wrapper'>
+                            <video
+                              controls
+                              draggable='false'
+                              autoPlay
+                              loop
+                              preload='metadata'
+                            >
+                              <source
+                                type='video/mp4'
+                                src='https://i.imgur.com/vRNfUT4.mp4'
+                              />
+                            </video>
+                          </div>
+                          {/* videos controls optional */}
+                        </div>
                       </div>
                     </div>
                     <div className='media-descr'>
@@ -106,7 +123,10 @@ function GalleryView() {
                   </div>
                 </div>
               </div>
-              <div className='content-tags'></div>
+              <div className='content-tags'>
+                {/* mapping tags */}
+                <a href='' className='tags'></a>
+              </div>
             </div>
 
             {/* comments  */}

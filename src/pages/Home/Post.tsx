@@ -9,7 +9,6 @@ type PostProps = {
 };
 
 const Post = ({ gallery }: PostProps) => {
-  // console.log({ gallery });
   return (
     <div className='post-wrapper'>
       <Link

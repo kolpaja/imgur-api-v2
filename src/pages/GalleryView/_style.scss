@@ -1,9 +1,152 @@
+@import './EngagementBar.scss';
+
 .gallery {
+  width: 90%;
+  max-width: 1152px;
+  position: relative;
+  padding-top: 24px;
+  margin: 0 auto;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: center;
   align-items: stretch;
+
   .gallery-main-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    opacity: 1;
+    flex-grow: 1;
+    align-content: stretch;
+    z-index: 1;
+    min-width: 0;
+    transition: opacity 5ms linear;
+
+    .gallery-engagement-bar {
+      width: 60px;
+      flex: 0 0 60px;
+      z-index: 3;
+    }
+
+    .gallery-content-wrapper {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin: 0 24px;
+      padding: 0 24px 24px;
+      min-width: 0;
+
+      .insideContentWrapper {
+        .gallery-content {
+          width: 100%;
+          .content-header {
+            position: relative;
+            z-index: 1;
+          }
+          .content-wrapper {
+            .media-container {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+
+              .media {
+                max-width: 100%;
+                margin-bottom: 24px;
+                background-color: rgba(0, 0, 0, 0.1);
+                min-height: 140px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+
+                .imgContainer {
+                  img {
+                    max-height: 750px;
+                    display: block;
+                    margin: 0 auto;
+                    max-width: 100%;
+                  }
+
+                  .dropdown {
+                    position: relative;
+                    font-size: 16px;
+                    .dropdown-title {
+                      font-weight: 600;
+                      letter-spacing: 1.5px;
+                      text-align: right;
+                      color: #babec4;
+                      cursor: pointer;
+                      border-radius: 3px;
+                      width: 24px;
+                      height: 24px;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                    }
+                  }
+                  .dropdown-media {
+                    position: absolute;
+                    right: 16px;
+                    top: 16px;
+                    visibility: hidden;
+                  }
+                }
+
+                .post-video {
+                  position: relative;
+                  overflow: hidden;
+                  text-align: center;
+                  width: 100%;
+                  .wrapper {
+                    display: flex;
+                    justify-content: center;
+                    isolation: auto;
+                    max-height: 80vh;
+
+                    .video-wrapper {
+                      display: flex;
+                      justify-content: center;
+                      isolation: auto;
+                      max-height: 80vh;
+                      video {
+                        width: 480px;
+                        height: 806px;
+                        max-height: 80vh;
+                        display: block;
+                        margin: 0 auto;
+                        max-width: 100%;
+                      }
+                    }
+                  }
+                }
+              }
+              .media-descr {
+                margin-bottom: 24px;
+                padding: 0 24px;
+                font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+                font-size: 16px;
+                line-height: 150%;
+                color: hsla(0, 0%, 100%, 0.9);
+                white-space: pre-wrap;
+                word-wrap: break-word;
+              }
+            }
+          }
+        }
+
+        .comment-list {
+          min-height: 500px;
+        }
+      }
+    }
+  }
+
+  .gallery-sidebar {
+    flex: 0 0 320px;
+    position: relative;
   }
 }

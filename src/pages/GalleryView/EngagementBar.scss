@@ -1,0 +1,172 @@
+.engagement-bar-container {
+  position: sticky;
+  top: 200px;
+  height: auto;
+  box-sizing: content-box;
+
+  .gallery-vote {
+    padding: 8px 0;
+    display: flex;
+    flex-flow: column;
+    align-content: center;
+
+    .vote-accolades {
+      position: relative;
+
+      .animateEmerald::after,
+      .animateEmerald::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 50%;
+        z-index: 1;
+      }
+
+      .animateEmerald::after {
+        background: #6432f9;
+        z-index: 1;
+        animation: animateAccolade 2s infinite;
+      }
+
+      @keyframes animateAccolade {
+        0% {
+          transform: scale(0);
+          opacity: 0.75;
+        }
+
+        100% {
+          transform: scale(1);
+          opacity: 0;
+        }
+      }
+
+      .btn-emerald {
+        height: 58px;
+        position: relative;
+        z-index: 1200;
+        width: auto;
+
+        svg {
+          position: absolute;
+          &:hover {
+            transform: scale(1.1);
+          }
+        }
+      }
+    }
+
+    .vote-controls {
+      border: 1px solid #464b57;
+      box-sizing: border-box;
+      border-radius: 4px;
+      max-height: 264px;
+    }
+
+    .item {
+      padding: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .vote:hover {
+      cursor: pointer;
+    }
+    .vote-up:hover {
+      svg path {
+        stroke: #01b96b;
+      }
+    }
+    .vote-down {
+      svg {
+        transition: transform 0.4s;
+        &:hover {
+          transform: translateY(2px);
+          path {
+            stroke: #fc6369;
+          }
+        }
+      }
+    }
+
+    .score {
+      font-size: 12px;
+      line-height: 12px;
+      opacity: 1;
+      transition: opacity 0.15s linear;
+      font-family: Helvetica, Arial, sans-serif;
+      letter-spacing: 0.05em;
+    }
+
+    .favorite {
+      padding-top: 12px;
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+      &:hover {
+        cursor: pointer;
+        svg {
+          transform: scale(1.1);
+          overflow: visible;
+          path {
+            stroke: #43d0bd;
+          }
+        }
+      }
+    }
+    .vote-accolades {
+    }
+  }
+
+  .gallery-share {
+    height: 72px;
+    box-sizing: border-box;
+    padding: 8px 0;
+    display: flex;
+    flex-flow: column;
+    align-content: center;
+    margin-bottom: 32px;
+
+    .item {
+      padding: 8px 0;
+      padding-top: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+
+      &:first-child {
+        padding-top: 16px;
+      }
+    }
+  }
+
+  .gallery-comment-count {
+    border: 1px solid #464b57;
+    box-sizing: border-box;
+    border-radius: 4px;
+    height: 74px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-content: center;
+    cursor: pointer;
+    text-align: center;
+    padding: 12px;
+
+    .item {
+      height: 32px;
+    }
+    .label {
+      font-size: 12px;
+      line-height: 12px;
+      padding-top: 6px;
+      letter-spacing: 0.05em;
+    }
+  }
+}
