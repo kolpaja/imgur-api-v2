@@ -5,6 +5,7 @@ interface filters {
   sort: 'viral' | 'top' | 'time' | 'rising';
   window: 'day' | 'week' | 'month' | 'year' | 'all';
   page: number;
+  showViral?: true;
 }
 
 const initialState: filters = {
@@ -12,6 +13,7 @@ const initialState: filters = {
   sort: 'viral',
   window: 'day',
   page: 0,
+  showViral: true,
 };
 
 export const filtersSlice = createSlice({
@@ -19,7 +21,6 @@ export const filtersSlice = createSlice({
   initialState,
   reducers: {
     changeFilters: (state: filters, actions: PayloadAction<filters>) => {
-      console.log('changeFilters', actions.payload);
       return (state = actions.payload);
     },
     nextPage: (state: filters) => {

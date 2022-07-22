@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Button, Dropdown } from 'react-bootstrap';
 import {
   ThreeDots,
@@ -13,6 +13,7 @@ import { useAppSelector } from '../../app/hooks';
 import { ReactComponent as Embed } from '../../assets/svg/embed.svg';
 import EngagementBar from './EngagementBar';
 import useAxios from '../../hooks/useAxios';
+import GalleryComments from './GalleryComments';
 
 function GalleryView() {
   let { galleryId } = useParams();
@@ -21,17 +22,16 @@ function GalleryView() {
   const { list } = useAppSelector((state) => state.galleries);
 
   const post: any = list?.find((item: any) => item.id === galleryId);
-  console.log(post);
+  // console.log(post);
 
   const postedTime = moment(post.datetime * 1000).fromNow();
 
   // find the details of the posting user or to create this ones profile
-  const { response, error, loading }: any = useAxios(
+  const { response, loading }: any = useAxios(
     `https://api.imgur.com/3/account/${post.account_url}`
   );
   useEffect(() => {
     if (!loading) setUser(response);
-    // console.log(user);
   }, [loading, response]);
 
   if (loading) return <div>loading</div>;
@@ -137,6 +137,7 @@ function GalleryView() {
                                       draggable='false'
                                       autoPlay
                                       loop
+                                      muted
                                       preload='metadata'
                                     >
                                       <source
@@ -154,9 +155,9 @@ function GalleryView() {
                               <div className='media-tags'>
                                 <div className='tags'>
                                   {media.tags.length > 0 &&
-                                    media.tags.map((tag: any) => {
-                                      <div className='tag'>{tag.name}</div>;
-                                    })}
+                                    media.tags.map((tag: any) => (
+                                      <div className='tag'>{tag.name}</div>
+                                    ))}
                                 </div>
                               </div>
                             </div>
@@ -186,9 +187,9 @@ function GalleryView() {
                               <div className='media-tags'>
                                 <div className='tags'>
                                   {media.tags.length > 0 &&
-                                    media.tags.map((tag: any) => {
-                                      <a className='tag'>#{tag.name}</a>;
-                                    })}
+                                    media.tags.map((tag: any) => (
+                                      <div className='tag'>{tag.name}</div>
+                                    ))}
                                 </div>
                               </div>
                             </div>
@@ -198,35 +199,28 @@ function GalleryView() {
                     )
                   )}
               </div>
-              <div className='content-tags'>
+              <div className='my-4'>
                 {/* mapping tags */}
-                <a href='' className='tags'></a>
+                <div className='tags'>
+                  {post.tags.length > 0 &&
+                    post.tags.map((tag: any) => (
+                      <a
+                        href=''
+                        className='tag'
+                        style={{
+                          background: `linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)) repeat scroll 0% 0%, rgba(0, 0, 0, 0) url("https://i.imgur.com/${tag.background_hash}_d.jpg?maxwidth=200&fidelity=grand") repeat scroll 0% 0%`,
+                        }}
+                      >
+                        {tag.name}
+                      </a>
+                    ))}
+                </div>
               </div>
             </div>
 
             {/* comments  */}
             {/*//TODO comments component */}
-            <div className='comment-list'>
-              {/* create comment-login/signup to create */}
-              <div className='comment-create'></div>
-
-              {/* comments headline nr-expand- type best-new-top */}
-              <div className='comments-headline'>
-                <div className='headline-counter'>
-                  {post.comment_count} comments
-                </div>
-                <div className='comments-expand-option'>expand icon</div>
-                <div className='dropdown comments-sort'></div>
-              </div>
-
-              {/* comments */}
-              <div className=''>
-                <div className='comments-list'>
-                  <div className='list-content'></div>
-                  <div className='load-more-comments'>load more comments</div>
-                </div>
-              </div>
-            </div>
+            <GalleryComments post={post} />
           </div>
         </div>
       </div>

@@ -18,7 +18,6 @@ export type GalleryFilters = {
 
 function Home() {
   const [isLoading, setIsloading] = useState(true);
-  const [error, setError] = useState();
 
   const dispatch = useAppDispatch();
   const filters = useAppSelector((state) => state.filters);
@@ -28,9 +27,7 @@ function Home() {
     const asyncFetchGalleries = async (filters: GalleryFilters) => {
       const { section, sort, window, page, showViral } = filters;
       const response = await fetch(
-        `${API_URL}/${section}/${sort}/${window}/${page}?showViral=${
-          showViral || true
-        }`,
+        `${API_URL}/${section}/${sort}/${window}/${page}?showViral=${showViral}`,
         {
           headers: {
             Authorization: 'Client-ID d7c5207abe0dfc3',
@@ -38,7 +35,6 @@ function Home() {
         }
       );
       const resData = await response.json();
-      // console.log(resData);
       if (resData.success) {
         setIsloading(false);
         dispatch(getGalleries(resData.data));

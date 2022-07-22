@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { Button, Stack } from 'react-bootstrap';
-import { GalleryFilters } from '.';
+import { ChangeEvent, useState } from 'react';
+import { Button, Form, Stack } from 'react-bootstrap';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import {
   changeFilters,
@@ -8,65 +7,70 @@ import {
   previousPage,
 } from '../../features/filtersSlice';
 
-type FiltersProps = {
-  filters: GalleryFilters;
-  setFilters: (filters: GalleryFilters) => void;
-};
-
 const Filters = () => {
   const [isTopSelected, setIsTopSelected] = useState(false);
   const [isUserSelected, setIsUserSelected] = useState(false);
-  const [isShowViral, setIsShowViral] = useState(true);
 
   //!Redux toolkit filters
   const toolkitFilters = useAppSelector((state) => state.filters);
   const dispatch = useAppDispatch();
 
   const onFilterChange = (event: any) => {
-    const select = event.target;
-    const option = select.options[select.selectedIndex];
-    // console.log({ select, option });
-
-    //filter for posts from user/top
-    if (select.name === 'section') {
-      option.value === 'user'
-        ? setIsUserSelected(true)
-        : setIsUserSelected(false);
-      option.value === 'top' ? setIsTopSelected(true) : setIsTopSelected(false);
-    }
-    dispatch(
-      changeFilters(
-        Object.assign(
-          { ...toolkitFilters, page: 0 },
-          { [select.name]: option.value }
+    if (event.target.type === 'checkbox') {
+      dispatch(
+        changeFilters(
+          Object.assign(
+            { ...toolkitFilters, page: 0 },
+            { showViral: event.target.checked }
+          )
         )
-      )
-    );
+      );
+    } else {
+      const select = event.target;
+      const option = select.options[select.selectedIndex];
+
+      //filter for posts from user/top
+      if (select.name === 'section') {
+        option.value === 'user'
+          ? setIsUserSelected(true)
+          : setIsUserSelected(false);
+        option.value === 'top'
+          ? setIsTopSelected(true)
+          : setIsTopSelected(false);
+      }
+      dispatch(
+        changeFilters(
+          Object.assign(
+            { ...toolkitFilters, page: 0 },
+            { [select.name]: option.value }
+          )
+        )
+      );
+    }
   };
 
   return (
-    <div className='filters d-flex align-items-center justify-content-around'>
+    <div className='filters'>
       {/* filter for section */}
-      <div>
-        <label htmlFor='section'></label>
+      <div className='select-wrapper'>
         <select
           id='section'
           name='section'
-          onChange={(e) => onFilterChange(e)}
+          title='Select '
+          onChange={(e: ChangeEvent<HTMLSelectElement>) => onFilterChange(e)}
           defaultValue={toolkitFilters.section}
         >
-          <option value='hot'>Hot</option>
-          <option value='top'>Top</option>
-          <option value='user'>User</option>
+          <option value='hot'>Most Viral</option>
+          <option value='top'>Highest Scoring</option>
+          <option value='user'>User submitted</option>
         </select>
       </div>
       {/* filter for sort */}
-      <div>
-        <label htmlFor='sort'>sorted by: </label>
+      <div className='select-wrapper'>
         <select
           id='sort'
           name='sort'
-          onChange={(e) => onFilterChange(e)}
+          onChange={(e: ChangeEvent<HTMLSelectElement>) => onFilterChange(e)}
           defaultValue={toolkitFilters.sort}
         >
           <option value='viral'>Viral</option>
@@ -75,13 +79,13 @@ const Filters = () => {
           {isUserSelected && <option value='rising'>Rising</option>}
         </select>
       </div>
+
       {/* filter for window (time) */}
-      <div>
-        <label htmlFor='window'>Time:</label>
+      <div className='select-wrapper'>
         <select
           id='window'
           name='window'
-          onChange={(e) => onFilterChange(e)}
+          onChange={(e: ChangeEvent<HTMLSelectElement>) => onFilterChange(e)}
           defaultValue={toolkitFilters.window}
         >
           <option value='day'>Today</option>
@@ -94,7 +98,21 @@ const Filters = () => {
 
       {/* testing next page */}
       <Stack direction='horizontal' gap={2}>
-        <Button onClick={() => dispatch(previousPage())}>Prev</Button>
+        <Form.Check
+          type='checkbox'
+          label='Show Viral'
+          aria-label='Show viral'
+          checked={toolkitFilters.showViral}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => onFilterChange(e)}
+        />
+      </Stack>
+      <Stack direction='horizontal' gap={2}>
+        <Button
+          disabled={toolkitFilters.page < 1}
+          onClick={() => dispatch(previousPage())}
+        >
+          Prev
+        </Button>
         {toolkitFilters.page}
         <Button onClick={() => dispatch(nextPage())}>Next</Button>
       </Stack>

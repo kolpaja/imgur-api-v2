@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
+import { ReactComponent as ImgurLogo } from '../assets/svg/imgurLogo.svg';
 
 const Navbar = () => {
   return (
-    <div className='Navbar px-5 mb-2 navbar'>
+    <div className='Navbar'>
       <div className='navbar-brand'>
         <Link to='/'>
-          <img src='' alt='imgur' />
+          <ImgurLogo />
         </Link>
       </div>
     </div>

@@ -37,12 +37,14 @@ function EngagementBar({ post }: any) {
           <Share title='share' width={24} height={32} />
         </div>
       </div>
-      <div className='gallery-comment-count'>
-        <div className='item'>
-          <ChatSquare title='Jump to comments' width={24} height={32} />
+      <a href={`#comments-${post.id}`}>
+        <div className='gallery-comment-count'>
+          <div className='item'>
+            <ChatSquare title='Jump to comments' width={24} height={32} />
+          </div>
+          <div className='item label'>{post.comment_count}</div>
         </div>
-        <div className='item label'>{post.comment_count}</div>
-      </div>
+      </a>
     </div>
   );
 }
