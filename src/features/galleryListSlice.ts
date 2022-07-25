@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type galleryList = {
-  list: [];
+  list: [] | null;
 };
 
 const initialState: galleryList = {

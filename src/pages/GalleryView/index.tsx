@@ -125,7 +125,7 @@ function GalleryView() {
                 {post.images.length > 0 &&
                   post.images.map((media: any) =>
                     media.animated ? (
-                      <div>
+                      <div key={media.id}>
                         <div className='media-container'>
                           <div className='media'>
                             <div className='media-video'>
@@ -156,7 +156,9 @@ function GalleryView() {
                                 <div className='tags'>
                                   {media.tags.length > 0 &&
                                     media.tags.map((tag: any) => (
-                                      <div className='tag'>{tag.name}</div>
+                                      <div className='tag' key={tag.id}>
+                                        {tag.name}
+                                      </div>
                                     ))}
                                 </div>
                               </div>
@@ -165,7 +167,7 @@ function GalleryView() {
                         </div>
                       </div>
                     ) : (
-                      <div>
+                      <div key={media.id}>
                         <div className='media-container'>
                           <div className='media'>
                             <div className='media-imgs'>
@@ -188,7 +190,9 @@ function GalleryView() {
                                 <div className='tags'>
                                   {media.tags.length > 0 &&
                                     media.tags.map((tag: any) => (
-                                      <div className='tag'>{tag.name}</div>
+                                      <div className='tag' key={tag.id}>
+                                        {tag.name}
+                                      </div>
                                     ))}
                                 </div>
                               </div>
@@ -207,6 +211,7 @@ function GalleryView() {
                       <a
                         href=''
                         className='tag'
+                        key={tag.id}
                         style={{
                           background: `linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)) repeat scroll 0% 0%, rgba(0, 0, 0, 0) url("https://i.imgur.com/${tag.background_hash}_d.jpg?maxwidth=200&fidelity=grand") repeat scroll 0% 0%`,
                         }}

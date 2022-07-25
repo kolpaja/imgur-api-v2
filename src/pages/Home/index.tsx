@@ -3,53 +3,25 @@ import { Spinner } from 'react-bootstrap';
 import { useAppSelector } from '../../app/hooks';
 import Filters from './Filters';
 import GalleryList from './GalleryList';
-import { getGalleries } from '../../features/galleryListSlice';
 import { useAppDispatch } from '../../app/hooks';
-
-const API_URL = 'https://api.imgur.com/3/gallery';
-
-export type GalleryFilters = {
-  section: 'hot' | 'top' | 'user';
-  sort: 'viral' | 'top' | 'time' | 'rising';
-  window: 'day' | 'week' | 'month' | 'year' | 'all';
-  page: number;
-  showViral?: boolean;
-};
+import { useGallery } from '../../hooks/useGallery';
 
 function Home() {
-  const [isLoading, setIsloading] = useState(true);
-
-  const dispatch = useAppDispatch();
-  const filters = useAppSelector((state) => state.filters);
   const { list } = useAppSelector((state) => state.galleries);
+  const { section, sort, window, page, showViral } = useAppSelector(
+    (state) => state.filters
+  );
+  const { loading, error } = useGallery(
+    `https://api.imgur.com/3/gallery/${section}/${sort}/${window}/${page}?showViral=${showViral}`
+  );
 
-  useEffect(() => {
-    const asyncFetchGalleries = async (filters: GalleryFilters) => {
-      const { section, sort, window, page, showViral } = filters;
-      const response = await fetch(
-        `${API_URL}/${section}/${sort}/${window}/${page}?showViral=${showViral}`,
-        {
-          headers: {
-            Authorization: 'Client-ID d7c5207abe0dfc3',
-          },
-        }
-      );
-      const resData = await response.json();
-      if (resData.success) {
-        setIsloading(false);
-        dispatch(getGalleries(resData.data));
-      } else {
-        console.log(resData.data.error);
-      }
-    };
-    asyncFetchGalleries(filters);
-  }, [filters]);
+  if (error) return <h1>ups...something went wrong</h1>;
 
   return (
     <div className='home'>
       <Filters />
 
-      {isLoading ? (
+      {loading ? (
         <Spinner
           animation='border'
           variant='info'

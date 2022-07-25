@@ -1,24 +1,21 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
-export function useGallery() {
-  const [gallery, setGallery] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<any>(null);
+import useAxios from './useAxios';
+import { getGalleries } from '../features/galleryListSlice';
+
+export function useGallery(url: any) {
+  const dispatch = useDispatch();
+  const { response, error, loading, data } = useAxios(url);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await axios(`${process.env.REACT_APP_API_URL}/gallery`);
-        setGallery(result.data);
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
+    const asyncFetchGalleries = async () => {
+      if (response.data.success) {
+        dispatch(getGalleries(response.data.data));
       }
     };
-    fetchData();
+    asyncFetchGalleries();
   }, []);
 
-  return { gallery, loading, error };
+  return { data, loading, error };
 }
